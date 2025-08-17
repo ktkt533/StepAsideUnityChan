@@ -23,9 +23,9 @@ public class UnityChanController : MonoBehaviour
     //ゲーム終了の判定
     private bool isEnd = false;
     //ゲーム終了時に表示するテキスト
-    private GameObject stateText;
+    private GameObject StateText;
     //スコアを表示するテキスト
-    private GameObject scoreText;
+    private GameObject ScoreText;
     //得点
     private int score = 0;
     //左ボタン押下の判定
@@ -47,10 +47,10 @@ public class UnityChanController : MonoBehaviour
         //Rigidbodyコンポーネントを取得
         this.myRigidbody = GetComponent<Rigidbody>();
 
-        //シーン中のstateTextオブジェクトの取得
-        this.stateText = GameObject.Find("GameResultText");
-        //シーン中のscoreTextオブジェクトの取得
-        this.scoreText = GameObject.Find("ScoreText");
+        //シーン中のStateTextオブジェクトの取得
+        this.StateText = GameObject.Find("GameResultText");
+        //シーン中のScoreTextオブジェクトの取得
+        this.ScoreText = GameObject.Find("ScoreText");
     }
 
     // Update is called once per frame
@@ -111,14 +111,14 @@ public class UnityChanController : MonoBehaviour
         if (other.gameObject.CompareTag("CarTag") || other.gameObject.CompareTag("TrafficConeTag"))
         {
             this.isEnd = true;
-            this.stateText.GetComponent<Text>().text = "Game Over";
+            this.StateText.GetComponent<Text>().text = "Game Over";
         }
 
         //ゴール地点に到着した場合
         if (other.gameObject.CompareTag("GoalTag"))
         {
             this.isEnd = true;
-            this.stateText.GetComponent<Text>().text = "CLEAR!!";
+            this.StateText.GetComponent<Text>().text = "CLEAR!!";
         }
 
         //コインに衝突した場合
@@ -127,7 +127,7 @@ public class UnityChanController : MonoBehaviour
             //スコアを加算
             this.score += 10;
             //ScoreTextに獲得した点数を表示
-            this.scoreText.GetComponent<Text>().text = "Score: " + this.score + "pt";
+            this.ScoreText.GetComponent<Text>().text = "Score: " + this.score + "pt";
             //パーティクルを再生
             GetComponent<ParticleSystem>().Play();
             //接触したコインのオブジェクトを破棄
