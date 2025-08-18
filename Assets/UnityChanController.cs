@@ -69,20 +69,33 @@ public class UnityChanController : MonoBehaviour
         float inputVelocityX = 0;
         //上方向の入力による速度
         float inputVelocityY = 0;
+
         //Unityちゃんを矢印キーまたはボタンに応じて左右に移動させる
+        //()有りisPressed　と　isRButtonDown　どちらかがtrue
+        //かつ
+        //positionX がmovableRangeより小さい
+
+        //()無しisRbuttonDownがtrueでpositionXがMovableRangeより小さい
         if ((Keyboard.current.leftArrowKey.isPressed || isLButtonDown) && -this.movableRange < this.transform.position.x)
         {
             //左速度への速度を代入
             inputVelocityX = -this.velocityX;
         }
-        else if (Keyboard.current.rightArrowKey.isPressed || isRButtonDown && this.transform.position.x < this.movableRange)
+        else if ((Keyboard.current.rightArrowKey.isPressed || isRButtonDown) && this.transform.position.x < this.movableRange)
+
+        if ((Keyboard.current.leftArrowKey.isPressed || isLButtonDown) && -this.movableRange < this.transform.position.x)
+        {
+            //左速度への速度を代入
+            inputVelocityX = -this.velocityX;
+        }
+        else if ((Keyboard.current.rightArrowKey.isPressed || isRButtonDown) && this.transform.position.x < this.movableRange)
         {
             //右速度への速度を代入
             inputVelocityX = this.velocityX;
         }
         //ジャンプしていないときにスペースが押されたらジャンプする
-        if (Keyboard.current.spaceKey.wasPressedThisFrame || isJButtonDown && this.transform.position.y < 0.5f)
-        {  
+        if ((Keyboard.current.spaceKey.wasPressedThisFrame || isJButtonDown) && this.transform.position.y < 0.5f)
+        { 
             //ジャンプアニメーションを再生
             this.myAnimator.SetBool("Jump", true);
             //上方向への速度を代入
